@@ -1,0 +1,83 @@
+env:
+  # BipedalWalker-v3
+  BipedalWalker-v3
+algo:
+  td3
+util:
+  ["NeighborhoodNet", "OracleNeighborhoodNet"]
+oracle_neighbor:
+  False
+wrapper_type:
+  basic
+bc_only:
+  False
+ood:
+  True
+hidden_dim:
+  256
+gamma:
+  0.99
+actor_optim:
+  adam
+critic_optim:
+  adam
+td_length:
+  1
+soft_update_target:
+  True
+actor_lr:
+  0.0003
+critic_lr:
+  0.0003
+tau:
+  0.005
+neighbor_model_alpha:
+  0.99
+episodes:
+  200
+seed:
+  1
+save_every:
+  10
+batch_size:
+  256
+buffer_size:
+  1000000
+buffer_type:
+  normal
+main_stage_type:
+  neighborhood_il
+buffer_warmup:
+  True
+continue_training:
+  False
+buffer_warmup_step:
+  2000
+save_weight_period:
+  50
+policy_update_delay:
+  2
+use_ounoise:
+  True
+render:
+  False
+update_neighbor_frequency:
+  3
+update_neighbor_step:
+  400
+update_neighbor_until:
+  1000
+discretize_reward:
+  False
+log_name:
+  ""
+duplicate_expert_last_state:
+  False
+data_name:
+  ""
+policy_threshold_ratio:
+  0.005
+auto_threshold_ratio:
+  False
+threshold_discount_factor:
+  0.995

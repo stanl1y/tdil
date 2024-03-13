@@ -1,0 +1,52 @@
+env:
+  LunarLander-v2
+algo:
+  discrete_sac
+wrapper_type:
+  basic
+hidden_dim:
+  256
+gamma:
+  0.99
+optim:
+  adam
+buffer_type:
+  normal
+td_length:
+  1
+soft_update_target:
+  True
+lr:
+  0.0003
+tau:
+  0.005
+episodes:
+  200
+seed:
+  1
+save_every:
+  10
+batch_size:
+  256
+buffer_size:
+  1000000
+main_stage_type:
+  off_policy
+buffer_warmup:
+  True
+continue_training:
+  False
+buffer_warmup_step:
+  2000
+save_weight_period:
+  50
+render:
+  False
+save_state_idx:
+  False
+buffer_to_tensor:
+  False
+delete_prev_weight:
+  True
+toy_reward_type:
+  "gail"

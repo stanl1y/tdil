@@ -1,0 +1,49 @@
+env:
+  # BipedalWalker-v3
+  MountainCarContinuous-v0
+algo:
+  ddpg
+wrapper_type:
+  basic
+hidden_dim:
+  256
+gamma:
+  0.99
+actor_optim:
+  adam
+critic_optim:
+  adam
+actor_lr:
+  0.0003
+critic_lr:
+  0.0003
+tau:
+  0.005
+episodes:
+  200
+seed:
+  1
+save_every:
+  10
+batch_size:
+  256
+buffer_size:
+  1000000
+buffer_type:
+  normal
+main_stage_type:
+  off_policy
+buffer_warmup:
+  True
+continue_training:
+  False
+buffer_warmup_step:
+  2000
+save_weight_period:
+  50
+delete_prev_weight:
+  False
+use_ounoise:
+  True
+render:
+  False

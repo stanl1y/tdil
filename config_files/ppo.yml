@@ -1,0 +1,67 @@
+env:
+  BipedalWalker-v3
+  # MountainCarContinuous-v0
+algo:
+  ppo
+wrapper_type:
+  basic
+hidden_dim:
+  256
+gamma:
+  0.99
+lambda_decay:
+  0.97
+target_kl:
+  0.005
+para_std:
+  False
+action_std:
+  0.6
+action_std_decay_rate:
+  0.95
+min_action_std:
+  0.005
+action_std_decay_freq:
+  25000
+ppo_clip_value:
+  0.3
+max_policy_train_iters:
+  80
+value_train_iters:
+  80
+standarize_reward:
+  True
+actor_optim:
+  adam
+critic_optim:
+  adam
+actor_lr:
+  0.0003
+critic_lr:
+  0.0003
+episodes:
+  200
+horizon:
+  2048
+max_episode_step:
+  2000
+train_agnet_period:
+  4000
+seed:
+  1
+save_every:
+  10
+batch_size:
+  -1
+buffer_size:
+  10000
+buffer_type:
+  onpolicy
+main_stage_type:
+  on_policy
+continue_training:
+  False
+save_weight_period:
+  50
+render:
+  False

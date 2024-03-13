@@ -1,0 +1,110 @@
+env:
+  BipedalWalker-v3
+algo:
+  sac
+util:
+  ["NeighborhoodNet", "OracleNeighborhoodNet"]
+oracle_neighbor:
+  False
+wrapper_type:
+  normobs
+bc_only:
+  False
+no_bc:
+  False
+ood:
+  False
+hidden_dim:
+  256
+gamma:
+  0.99
+actor_optim:
+  adam
+critic_optim:
+  adam
+buffer_type:
+  normal
+buffer_to_tensor:
+  False
+td_length:
+  1
+soft_update_target:
+  True
+actor_lr:
+  0.0003
+critic_lr:
+  0.0003
+alpha_lr:
+  0.0003
+tau:
+  0.0001
+neighbor_model_alpha:
+  0.99
+episodes:
+  200
+seed:
+  1
+save_every:
+  10
+batch_size:
+  256
+buffer_size:
+  1000000
+main_stage_type:
+  neighborhood_il
+buffer_warmup:
+  True
+continue_training:
+  False
+buffer_warmup_step:
+  2000
+save_weight_period:
+  50
+use_ounoise:
+  False
+log_alpha_init:
+  !!float 0
+render:
+  False
+update_neighbor_frequency:
+  3
+update_neighbor_step:
+  400
+update_neighbor_until:
+  50000
+discretize_reward:
+  False
+log_name:
+  ""
+duplicate_expert_last_state:
+  False
+data_name:
+  ""
+policy_threshold_ratio:
+  10
+auto_threshold_ratio:
+  False
+threshold_discount_factor:
+  0.995
+fix_env_random_seed:
+  False
+no_hard_negative_sampling:
+  False
+terminate_when_unhealthy:
+  False
+explore_step:
+  10
+use_env_done:
+  False
+save_state_idx:
+  True
+use_target_neighbor:
+  True
+entropy_loss_weight_decay_rate:
+  1
+no_update_alpha:
+  False
+easy_nagative_weight_decay:
+  False
+easy_nagative_weight_decay_rate:
+  0.999
