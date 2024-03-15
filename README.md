@@ -6,6 +6,9 @@ This repository contains the official code implementation of the paper: [Expert 
 The code is based on [@stanl1y](https://github.com/stanl1y)'s reinforcement learning framework, which is available at [stanl1y/RL_framework](https://github.com/stanl1y/RL_framework).
 
 Note: The `neighbor model` in the codebase refers to the transition discriminator in our paper.
+## Result
+TDIL enables the agent to learn from a single demonstration and achieve expert-level performance. The following video shows the HalfCheetah-v3 environment. The left side is the expert demonstration, and the right side is the learned policy.
+
 
 ## Installation
 
