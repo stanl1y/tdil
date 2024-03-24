@@ -1,3 +1,8 @@
+# Experimental data
+wandb/
+trained_model/
+experiment_logs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
