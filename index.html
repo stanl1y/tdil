@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Expert Proximity as Surrogate Rewards for Single Demonstration Imitation Learning">
+  <meta name="keywords" content="Expert Proximity as Surrogate Rewards, TDIL, One Demonstration, Single Demonstration, Single-demonstration Imitation Learning, Imitation Learning,">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expert Proximity as Surrogate Rewards for Single Demonstration Imitation Learning</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/robodog.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Expert Proximity as Surrogate Rewards for Single Demonstration Imitation Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+                Chia-Cheng Chiang<sup>*1</sup>,</span>
+            <span class="author-block">
+                Li-Cheng Lan<sup>*2</sup>,</span>
+            <span class="author-block">
+                Wei-Fang Sun<sup>3</sup>,
+            </span>
+            <span class="author-block">
+                Chien Feng<sup>1</sup>,
+            </span>
+            <span class="author-block">
+                Cho-Jui Hsieh<sup>2</sup>,
+            </span>
+            <span class="author-block">
+                Chun-Yi Lee<sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+            <span class="author-block"><sup>1</sup> ELSA Lab, Department of Computer Science, National Tsing Hua University, Hsinchu, Taiwan</span>
+            <span class="author-block"><sup>2</sup>Department of Computer Science, University of California, Los Angeles, CA, USA</span>
+            <span class="author-block"><sup>3</sup>NVIDIA AI Technology Center, NVIDIA Corporation, Santa Clara, CA, USA</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2402.01057"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2402.01057"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/stanl1y/tdil"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/hc.mov"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Our work TDIL makes it possible for the imitation learning agent to achieve expert-level performance <b>WITH ONLY ONE</b> expert demonstration
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+            <p>Single-demonstration imitation learning is brutal: one expert trajectory, zero access to the ground-truth reward, 
+                and the agent starts from randomly sampled initial states. Standard IL methods collapse—too sparse, too brittle, no guidance once 
+                the agent steps off the expert path.
+            </p>
+            <p>
+                TDIL (Transition Discriminator-based Imitation Learning) introduces a dense, dynamics-aware surrogate reward built 
+                around expert proximity rather than geometric distance or adversarial distribution matching. Instead of asking 
+                "how close are these states in L2?", TDIL asks the only question that matters in an MDP:
+            </p>
+            <blockquote>"Can the agent reasonably transition back toward the expert support?"</blockquote>
+            <p>
+                This shift produces stronger generalization, faster convergence, and state-of-the-art performance across MuJoCo and Adroit Door, even with only one demonstration.
+            </p>
+        </div>
+
+        <h2 class="title is-3">Key Idea: Expert Proximity as Reward Signal</h2>
+        <div class="content has-text-justified">
+            <p>The core problem in single-demo IL is reward sparsity. Basic IRL only rewards expert state-action pairs; everything else is an uninformative void. Geometric distance-based methods (e.g., PWIL, FISH) pretend the environment is Euclidean—even when transitions are asymmetric or blocked.</p>
+            <p>TDIL solves this by defining expert proximity:</p>
+            <ul>
+                <li>A state is "expert-proximal" if it can reach an expert state within one valid transition.</li>
+                <li>This notion depends entirely on the environment's dynamics.</li>
+                <li>The surrogate reward encourages transitions that move toward these proximal states.</li>
+            </ul>
+            <p>The result is a reward landscape that is both dense and aligned with actual reachability—not naïve geometric closeness.</p>
+        </div>
+
+        <h2 class="title is-3">Toy Examples</h2>
+        <div class="content has-text-justified">
+          <p>
+            To illustrate the effectiveness of our approach, we present a comparative analysis using a simple 
+            grid-world navigation task. The comparison below demonstrates how different imitation learning methods 
+            perform in terms of reward signal distribution and convergence speed when learning from a single 
+            expert demonstration.
+          </p>
+        </div>
+        
+        <div class="content has-text-centered">
+          <img src="./static/images/toy.png" alt="Toy Example Comparison" style="width: 100%; max-width: 900px;"/>
+          <p class="has-text-justified" style="margin-top: 1rem;">
+            <strong>Figure 1:</strong> Comparative analysis of different IL methods in a grid-world environment. 
+            <strong>(a)</strong> The expert's demonstration trajectory is shown with blue arrows, while red lines 
+            represent impassable obstacles. Green arrows indicate state-action pairs that lead directly toward 
+            expert states. <strong>(b)-(d)</strong> Reward signals computed by various methods, highlighting the 
+            differences in reward density and spatial distribution. <strong>(e)-(h)</strong> The learned policies' 
+            action selections, demonstrating how different reward formulations affect the resulting behavior.
+          </p>
+        </div>
+
+        <h2 class="title is-3">How TDIL Works</h2>
+        <div class="content has-text-justified">
+            <h3 class="title is-4">1. Learn a Transition Discriminator</h3>
+            <p>TDIL trains a discriminator \(D(s_i, s_j)\) that predicts whether \(s_i\) can transition to \(s_j\) in a single timestep.</p>
+            <ul>
+                <li>Positive samples come from the agent's replay buffer (real transitions).</li>
+                <li>Negative samples include:
+                    <ul>
+                        <li>Contrastive state pairs (rarely valid transitions).</li>
+                        <li>Reversed transitions (almost always invalid).</li>
+                    </ul>
+                </li>
+                <li>Achieves ≥ 98.8% accuracy across all tasks.</li>
+            </ul>
+            <p>This provides a powerful model of one-step reachability.</p>
+
+            <h3 class="title is-4">2. Build a Surrogate Reward from Expert Proximity</h3>
+            <p>For each next-state \(s_{t+1}\) sampled from the agent's replay buffer during the Soft Actor-Critic (SAC) training, TDIL checks whether it can reach any expert state.</p>
+            <p>The surrogate reward:</p>
+            <p style="text-align: center;">
+                \(R_{\text{TDIL}}(s_t, a_t) = \mathbb{E}_{s_{t+1}}[p(\tilde{O} \mid s_{t+1})]\)
+            </p>
+            <p>is approximated via the transition discriminator:</p>
+            <p style="text-align: center;">
+                \(R_{\text{TDIL}} \approx \sum_i D(s_{t+1}, s_i^{\text{expert}})\)
+            </p>
+            <p>This gives dense, meaningful reward everywhere the agent might explore.</p>
+
+            <h3 class="title is-4">3. Train with Aggregated Reward</h3>
+            <p>Combine IRL reward and TDIL surrogate reward:</p>
+            <p style="text-align: center;">
+                \(R_{\text{agg}} = \alpha R_{\text{IRL}} + (1-\alpha) R_{\text{TDIL}}\)
+            </p>
+            <ul>
+                <li>Works robustly for \(\alpha \in [0.1, 0.9]\).</li>
+                <li>Even pure TDIL+BC (no IRL reward, only TDIL reward + Behavior Cloning loss on policy) hits expert-level performance.</li>
+            </ul>
+
+            <h3 class="title is-4">4. Optimize the Policy</h3>
+            <p>A Soft Actor-Critic (SAC) agent is trained using the aggregated reward.</p>
+            <p>The discriminator and RL agent train simultaneously, enabling stable reward shaping as the agent explores the environment.</p>
+
+            <h3 class="title is-4">Framework Overview</h3>
+            <p>
+                <a href="#Framework_1">Figure 2</a> presents an overview of the proposed TDIL algorithm,
+              which involves repeating the following four steps.
+              First, the agent interacts with the environment and stores the collected transitions 
+              in the replay buffer. These transitions are then utilized to update the transition 
+              discriminator with binary cross entropy loss in the second step. In the third step, 
+              a batch of transitions is sampled from the replay buffer to calculate the aggregated 
+              reward \(R_{\text{agg}}\), which is defined as the following:
+            </p>
+            <p style="text-align: center;">
+              $$
+              R_{\text{agg}}(s_t,a_t) \stackrel{\mathrm{def}}{=} \beta R_{\text{IRL}}(s_t,a_t) + (1-\beta) R_{\text{TDIL}}(s_t,a_t)
+              $$
+            </p>
+            <div class="columns is-centered">
+              <!-- First column for framework1 -->
+              <div class="column is-half">
+                <div class="content has-text-centered" id="Framework_1">
+                  <img src="./static/images/framework1.png" alt="Framework 1"/>
+                  <p></p>Figure 2: Framework of TDIL</p>
+                </div>
+              </div>
+              <!-- Second column for framework2 -->
+              <div class="column is-half">
+                <div class="content has-text-centered">
+                  <img src="./static/images/framework2.png" alt="Framework 2" style="width: 75%;"/>
+                  <p>Figure 3: \(R_{\text{TDIL}}\) generating process </p>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <h2 class="title is-3">Experimental Highlights</h2>
+        <div class="content has-text-justified">
+            <h3 class="title is-4">MuJoCo (HalfCheetah-v3, Hopper-v3, Ant-v3, Humanoid-v3, Walker2d-v3)</h3>
+            <ul>
+                <li>Both TDIL variants (TDIL + BC and TDIL (Ragg)) reach expert-level performance across all environments.</li>
+                <li>BC alone fails to generalize.</li>
+                <li>GAIL & f-IRL struggle under single-demo sparsity.</li>
+                <li>PWIL suffers when Euclidean distance is misaligned with dynamics.</li>
+                <li>CFIL succeeds only on Hopper-v3.</li>
+                <li><strong>TDIL consistently outperforms all baselines.</strong></li>
+            </ul>
+
+            <div class="content has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
+              <img src="./static/images/main_exp.png" alt="MuJoCo Experimental Results" style="width: 100%; max-width: 1000px;"/>
+              <p class="has-text-justified" style="margin-top: 1rem;">
+                <strong>Figure 4:</strong> Performance comparison on MuJoCo benchmarks. The results show normalized performance relative to expert demonstrations across all tested environments.
+              </p>
+            </div>
+
+            <h3 class="title is-4">Adroit Door (Dexterous Manipulation)</h3>
+            <ul>
+                <li>Baselines (f-IRL, CFIL) achieve ≤ 40% success.</li>
+                <li><strong>TDIL variants achieve 100% success rate.</strong></li>
+                <li>This confirms TDIL's robustness under high-dimensional and contact-rich dynamics.</li>
+            </ul>
+        </div>
+
+        <h2 class="title is-3">Blind Model Selection via Relative Rewards</h2>
+        <div class="content has-text-justified">
+            <p>IL often lacks the ground-truth reward, making checkpoint selection guesswork.</p>
+            <p>TDIL introduces relative TDIL return:</p>
+            <p style="text-align: center;">
+                \(\frac{\sum_t R_{\text{TDIL}}(s_t)}{\sum_i R_{\text{TDIL}}(s_i^{\text{expert}})}\)
+            </p>
+            <p>This normalized metric:</p>
+            <ul>
+                <li>Correlates strongly with real environment returns</li>
+                <li>Works consistently for all benchmarks</li>
+                <li>Avoids misleading fluctuations in raw TDIL return</li>
+            </ul>
+            <p><strong>Practically: you get a reward-free model selection mechanism.</strong></p>
+        </div>
+
+        <h2 class="title is-3">Ablations (Summary)</h2>
+        <div class="content has-text-justified">
+            <ul>
+                <li>Varying α (IRL-to-surrogate weight) barely affects stability: TDIL performs reliably across wide ranges.</li>
+                <li>Removing BC drops performance slightly but still beats baselines.</li>
+                <li>Transition discriminator remains accurate regardless of sampling balance hyperparameters.</li>
+                <li>Hard negative samples matter mostly in high-dimensional environments (e.g., Humanoid-v3).</li>
+            </ul>
+        </div>
+
+        <h2 class="title is-3">Why TDIL Succeeds</h2>
+        <div class="content has-text-justified">
+            <ul>
+                <li><strong>Reachability beats geometry</strong> → no trapping behind barriers</li>
+                <li><strong>Dense reward helps exploration</strong> → faster convergence</li>
+                <li><strong>Transition dynamics awareness</strong> → respects actual environment behavior</li>
+                <li><strong>Trains on agent data, not only demo data</strong> → avoids overfitting</li>
+            </ul>
+            <p>TDIL adapts to single-demo IL constraints rather than fighting against them.</p>
+        </div>
+
+        <h2 class="title is-3">Contributions</h2>
+        <div class="content has-text-justified">
+            <ul>
+                <li>Introduces a dynamics-aware surrogate reward for single-demonstration IL</li>
+                <li>Shows expert-level performance across MuJoCo and Adroit Door</li>
+                <li>Provides a practical, reward-free model selection mechanism</li>
+                <li>Demonstrates strong stability and robustness through extensive ablations</li>
+                <li>Highlights limitations of geometric and adversarial IL methods under sparse data</li>
+            </ul>
+        </div>
+
+        <h2 class="title is-3">Future Directions</h2>
+        <div class="content has-text-justified">
+            <ul>
+                <li>Extend surrogate rewards beyond one-step reachability</li>
+                <li>Multi-step reachability graph estimation</li>
+                <li>Better transition-aware representation learning</li>
+                <li>Scaling TDIL toward real robotics or sim-to-real deployment</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{chiangexpert,
+    title={Expert Proximity as Surrogate Rewards for Single Demonstration Imitation Learning},
+    author={Chiang, Chia-Cheng and Lan, Li-Cheng and Sun, Wei-Fang and Feng, Chien and Hsieh, Cho-Jui and Lee, Chun-Yi},
+    booktitle={Forty-first International Conference on Machine Learning}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
