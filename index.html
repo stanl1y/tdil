@@ -262,6 +262,21 @@
                 </div>
               </div>
             </div>
+
+            <div class="box has-background-light" style="margin-top: 1.5rem;">
+              <h4 class="title is-5">Why is the TDIL reward \(R_{\text{TDIL}}\) more accurate than previous works?</h4>
+              <p class="content">
+                The Transition Discriminator gains awareness of the environment's dynamics through contrastive learning on data collected directly from the environment. Unlike geometric distance metrics, it evaluates proximity based on actual transition feasibility.
+              </p>
+              
+              <h4 class="title is-5">Why is the TDIL reward \(R_{\text{TDIL}}\) denser than IRL reward?</h4>
+              <p class="content">
+                IRL rewards typically assign signals only to expert state-action pairs, which form a manifold of negligible volume in high-dimensional space. In contrast, our TDIL reward extends to all states within the expert's proximity (one-step reachability). The union of these proximal states creates a volume with non-zero measure, significantly increasing the chance for the exploring agent to encounter reward signals.
+              </p>
+              <p class="content">
+                Furthermore, the transition discriminator is trained in a stable, non-adversarial manner. This avoids the instability and "reward vanishing" issues common in min-max adversarial methods (like GAIL) when the agent's policy begins to resemble the expert's behavior.
+              </p>
+            </div>
         </div>
 
         <h2 class="title is-3">Experimental Highlights</h2>
